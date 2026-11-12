@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MathSphere SMA - Solusi & Pembelajaran Matematika</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,7 +35,7 @@
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
 
     <!-- Navbar -->
-    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-xl shadow-md">
@@ -85,7 +85,7 @@
         <section id="tab-home" class="space-y-12">
             <!-- Hero Section -->
             <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-600 to-indigo-700 text-white p-8 md:p-12 shadow-xl">
-                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl pointer-events-none">
                     <i class="fa-solid fa-calculator"></i>
                 </div>
                 <div class="relative z-10 max-w-2xl space-y-6">
@@ -125,6 +125,118 @@
                 <div onclick="switchTab('quiz')" class="group cursor-pointer p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
                     <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
                         <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">50 Soal Kuis</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Uji kemampuan dengan 50 soal latihan pilihan ganda berserta pembahasan langkah benar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB AI: TANYA AI -->
+        <section id="tab-ai" class="hidden space-y-6 max-w-4xl mx-auto">
+            <div class="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-[600px]">
+                <div class="flex items-center space-x-3 pb-4 border-b border-slate-200 dark:border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg font-bold shadow-inner">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold">Asisten AI Matematika SMA</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Tanyakan soal aljabar, kalkulus, trigonometri, atau konsep rumus apapun.</p>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div id="chat-messages" class="flex-grow overflow-y-auto py-4 space-y-4 pr-2">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-1">AI</div>
+                        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 max-w-[85%] space-y-1 shadow-sm">
+                            <p>Halo! Saya asisten AI matematika Anda. Ketik pertanyaan atau soal matematika SMA Anda di bawah, dan saya akan memberikan penjelasan langkah demi langkah!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input Area -->
+                <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+                    <form id="chat-form" onsubmit="handleChatSubmit(event)" class="flex gap-2">
+                        <input type="text" id="chat-input" placeholder="Contoh: Bagaimana cara mencari turunan dari f(x) = 3x² + 5x - 2?" class="flex-grow px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-sm shadow transition flex items-center space-x-2">
+                            <span>Kirim</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: SOLVER -->
+        <section id="tab-solver" class="hidden space-y-6">
+            <div class="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="max-w-2xl mb-6">
+                    <h2 class="text-2xl font-bold mb-2">Pencari & Pemecah Soal Matematika</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Pilih topik matematika di bawah ini untuk menghitung dan melihat langkah penyelesaian lengkap.</p>
+                </div>
+
+                <!-- Topic Selector Tabs -->
+                <div class="flex flex-wrap gap-2 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <button onclick="setSolverTopic('kuadrat')" id="st-kuadrat" class="px-4 py-2 rounded-xl text-sm font-semibold transition bg-brand-600 text-white shadow-sm">Persamaan Kuadrat</button>
+                    <button onclick="setSolverTopic('matriks')" id="st-matriks" class="px-4 py-2 rounded-xl text-sm font-semibold transition bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Matriks 2x2</button>
+                    <button onclick="setSolverTopic('turunan')" id="st-turunan" class="px-4 py-2 rounded-xl text-sm font-semibold transition bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Turunan (Kalkulus)</button>
+                    <button onclick="setSolverTopic('statistika')" id="st-statistika" class="px-4 py-2 rounded-xl text-sm font-semibold transition bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Statistika (Mean)</button>
+                    <button onclick="setSolverTopic('aritmatika')" id="st-aritmatika" class="px-4 py-2 rounded-xl text-sm font-semibold transition bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Barisan Aritmatika</button>
+                </div>
+
+                <!-- Solver Form Container -->
+                <div id="solver-form-area" class="space-y-4 bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <!-- Form Kuadrat -->
+                    <div id="form-kuadrat" class="solver-form space-y-4">
+                        <p class="text-sm font-medium">Bentuk umum: ax² + bx + c = 0</p>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold mb-1">Nilai a</label>
+                                <input type="number" id="k-a" value="1" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold mb-1">Nilai b</label>
+                                <input type="number" id="k-b" value="-5" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold mb-1">Nilai c</label>
+                                <input type="number" id="k-c" value="6" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                        </div>
+                        <button onclick="solveKuadrat()" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-md transition">Hitung Akar-akar Kuadrat</button>
+                    </div>
+
+                    <!-- Form Matriks 2x2 -->
+                    <div id="form-matriks" class="solver-form hidden space-y-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <p class="text-sm font-medium">Kalkulator Matriks Ordo 2 × 2</p>
+                            <select id="m-op" onchange="toggleMatrixB()" class="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="det">Determinan Matriks A (|A|)</option>
+                                <option value="inv">Invers Matriks A (A⁻¹)</option>
+                                <option value="add">Penjumlahan (A + B)</option>
+                                <option value="sub">Pengurangan (A - B)</option>
+                                <option value="mul">Perkalian (A × B)</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Matriks A -->
+                            <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 space-y-3">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Matriks A</h4>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="number" id="ma-11" value="4" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-center font-semibold">
+                                    <input type="number" id="ma-12" value="3" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-center font-semibold">
+                                    <input type="number" id="ma-21" value="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-center font-semibold">
+                                    <input type="number" id="ma-22" value="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-center font-semibold">
+                                </div>
+                            </div>
+
+                            <!-- Matriks B -->
+                            <div id="matrix-b-box" class="hidden p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 space-y-3">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Matriks B</h4>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="number" id="mb-11" value="1" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark: <i class="fa-solid fa-award"></i>
                     </div>
                     <h3 class="text-lg font-bold mb-2">50 Soal Kuis</h3>
                     <p class="text-sm text-slate-500 dark:text-slate-400">Uji kemampuan dengan 50 soal latihan pilihan ganda berserta pembahasan langkah benar.</p>
